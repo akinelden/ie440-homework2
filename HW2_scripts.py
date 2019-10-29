@@ -17,8 +17,8 @@ C = np.asarray(costs)
 
 #%%
 
-def squaredDistSolforSingle(H=[], A=[], C=[], n=41): 
-    facility42 = np.delete(C[n], 0)
+def squaredDistSolforSingle(H=[], A=[], C=[], m=41): 
+    facility42 = np.delete(C[m], 0)
     
     x_v1_star = (np.sum(np.multiply(np.multiply(H[:,1],facility42),A[:,1]))/np.dot(H[:,1], facility42))
     x_v2_star = (np.sum(np.multiply(np.multiply(H[:,1],facility42),A[:,2]))/np.dot(H[:,1], facility42))
