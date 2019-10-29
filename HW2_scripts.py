@@ -37,23 +37,21 @@ plt.scatter(A[:, 1], A[:, 2], s=np.size(A,axis=0))
 index_array=np.arange(100)
 def ALA(H=[], A=[], C=[], index_array=index_array): 
     
-    x_star=np.array([])
-    y_star=np.array([])
+    x_star = np.zeros(shape=(50,2))
     indices = np.random.choice(index_array, 2, replace=False) 
     for i in range(50):
         indices = np.random.choice(index_array, 2, replace=False)   
         cost_facility = np.delete(C[i], 0)[indices] #i is the facility number
-        x_star_new = (np.sum(np.multiply(np.multiply(H[indices][:,1],cost_facility),A[indices][:,1]))/np.dot(H[indices][:,1], cost_facility))
-        y_star_new = (np.sum(np.multiply(np.multiply(H[indices][:,1],cost_facility),A[indices][:,2]))/np.dot(H[indices][:,1], cost_facility))
-        x_star=np.append(x_star,x_star_new)
-        y_star=np.append(y_star,y_star_new)
+        x1_star_new = (np.sum(np.multiply(np.multiply(H[indices][:,1],cost_facility),A[indices][:,1]))/np.dot(H[indices][:,1], cost_facility))
+        x2_star_new = (np.sum(np.multiply(np.multiply(H[indices][:,1],cost_facility),A[indices][:,2]))/np.dot(H[indices][:,1], cost_facility))
+        x_star[i] = [x1_star_new,x2_star_new]
         index_array=np.setdiff1d(index_array,indices)
         if(index_array.size==0):
             break
-            
-        #COST FUNCTION KOYULUP UPDATE YAPILACAK
-        #dist yakınlığına göre reassignment yapılacak
-    return x_star, y_star
-[x_star,y_star]=ALA(H,A,C)
+       #COST FUNCTION KOYULUP UPDATE YAPILACAK
+        #dist yakınlığına göre reassignment yapılacak     
+    return x_star
+x_star=ALA(H,A,C)
 
 #%%
+
