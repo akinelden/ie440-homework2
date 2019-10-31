@@ -61,17 +61,19 @@ def ALAHeuristics(H=[], A=[], C=[], index_array=np.arange(100), seed=440):
     for i in range(100):
         facility_customers[customer_assignments[i]].append(i)
     # Solving m single facility location problems and computing new objective value until no improvement
-    objective = np.iinfo(np.int32).max
+    old_objective = np.iinfo(np.int32).max
+    new_objective=0
     while(True):
         for i in range(50):
             x1, x2 = squaredDistSolforSingle(H[facility_customers[i]],A[facility_customers[i]],C[:,facility_customers[i]],i)
             facility_locations[i] = np.array([x1,x2])
-        # Objective value calculation
-        new_objective = 0
+            customer_coordinates[i]=A[facility_customers[i]][:,[1,2]]
+            facility_cost=np.sum((customer_coordinates[i]-facility_locations[i])**2)
+            new_objective=new_objective+facility_cost #new objective is the cost of current assignment
         # TODO : Make calculation
-        if(new_objective==objective):
+        if(new_objective>old_objective):
             break
-        objective = new_objective
+        old_objective = new_objective
         # Reassignment of customers according to distance to facilities
         
     return facility_locations, objective
