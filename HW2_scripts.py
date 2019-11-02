@@ -131,3 +131,5 @@ for i in range(50):
 plt.scatter(locations[:,0], locations[:,1], marker='^',c='r', s=60)
 plt.scatter(A[:,0], A[:,1],s=20)
 
+table = pd.concat([pd.DataFrame(np.arange(50)), pd.DataFrame(locations), pd.DataFrame(assigned_customers)], axis=1)
+print(table.to_latex(index=False,float_format='%.2f'))
