@@ -49,8 +49,18 @@ def squaredDistSolforSingle(H=[], A=[], C=[], m=41):
 
 plt.scatter(A[:, 0], A[:, 1], s=np.size(A,axis=0))
 
-x1, x2 = squaredDistSolforSingle(H,A,C,41)
+m=41 # selected facility
+
+x1, x2 = squaredDistSolforSingle(H,A,C,m)
+plt.scatter(x1,x2, marker='^', s = 150)
+
+# C[m,:]*H ->> cost for each consumer per unit distance
+# np.sum((A-[x1,x2])**2, axis=1) ->> squared distances of each consumer to facility m
+# objFuncValue ->> total of the multiplication of cost per dist and distances
+objFuncValue = np.dot(C[m,:]*H,np.sum((A-[x1,x2])**2, axis=1))
+
 x1, x2
+objFuncValue
 
 
 # In[23]:
