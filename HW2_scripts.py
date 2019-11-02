@@ -59,8 +59,7 @@ plt.scatter(x1,x2, marker='^', s = 150)
 # objFuncValue ->> total of the multiplication of cost per dist and distances
 objFuncValue = np.dot(C[m,:]*H,np.sum((A-[x1,x2])**2, axis=1))
 
-x1, x2
-objFuncValue
+x1, x2, objFuncValue
 
 
 # In[23]:
