@@ -47,12 +47,15 @@ def squaredDistSolforSingle(H=[], A=[], C=[], m=41):
 # In[4]:
 
 
-plt.scatter(A[:, 0], A[:, 1], s=np.size(A,axis=0))
+plt.scatter(A[:, 0], A[:, 1], s=np.size(A,axis=0), label='consumers')
 
 m=41 # selected facility
 
 x1, x2 = squaredDistSolforSingle(H,A,C,m)
-plt.scatter(x1,x2, marker='^', s = 150)
+
+plt.scatter(x1,x2, marker='^', s = 150, label='facility'+ str(m+1))
+plt.legend()
+plt.savefig("{0}.png".format('Facility' + str(m+1)))
 
 # C[m,:]*H ->> cost for each consumer per unit distance
 # np.sum((A-[x1,x2])**2, axis=1) ->> squared distances of each consumer to facility m
